@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import HomePage from '../pages/home.spec';
+import HomePage from '../pages/home.page';
 
 test.describe('home', () => {
   let homePage: HomePage;
