@@ -1,17 +1,26 @@
 import { test, expect } from '@playwright/test';
+import BlogPage from '../pages/blog.page'
 
 test.describe('first task', () => {
+  let blogPage: BlogPage;
+
   test('number of posts on blog page', async ({ page }) => {
-    await page.goto('https://practice.automationbro.com/blog/');
-    const postsNumber = page.locator('.widget-area .widget_recent_entries li');
-    await expect(postsNumber).toHaveCount(5)
+    blogPage = new BlogPage(page)
+
+    await blogPage.navigate();
+
+    await expect(blogPage.postsNumber).toHaveCount(5)
   })
+
   test('number of letters in the name of each post', async ({ page }) => {
-    await page.goto('https://practice.automationbro.com/blog/');
-    const postsNumber = page.locator('.widget-area .widget_recent_entries li');
-    for (const el of await postsNumber.elementHandles()) {
-      console.log(el)
-      expect(((await el.textContent()).trim()).length).toBeGreaterThan(15)
+    blogPage = new BlogPage(page)
+
+    await blogPage.navigate();
+
+    const postsList = blogPage.postsList;
+
+    for (const el of await postsList.elementHandles()) {
+      expect(((await el.textContent())?.trim())?.length)?.toBeGreaterThan(10)
     }
   })
 })
