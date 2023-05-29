@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import CartPage from '../pages/cart.page';
 const path = require('path')
 
-test.describe.only('Upload file', () => {
+test.describe('Upload file', () => {
 
   let cartPage: CartPage;
 
